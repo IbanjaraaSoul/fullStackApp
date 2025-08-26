@@ -1,0 +1,47 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "React frontend for full-stack application",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "test": "jest",
+    "test:small": "jest --testNamePattern='\\[Small\\]'",
+    "test:medium": "jest --testNamePattern='\\[Medium\\]'",
+    "test:large": "jest --testNamePattern='\\[Large\\]'",
+    "test:ci": "jest --ci --coverage --testNamePattern='\\[Small\\]|\\[Medium\\]'",
+    "test:e2e": "jest --testNamePattern='\\[Large\\]'",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "fp-ts": "^2.16.2",
+    "io-ts": "^2.2.22",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vitejs/plugin-react": "^4.1.0",
+    "eslint": "^8.53.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.4",
+    "jest": "^30.0.5",
+    "jest-environment-jsdom": "^30.0.5",
+    "jsdom": "^26.1.0",
+    "ts-jest": "^29.4.1",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0"
+  }
+}

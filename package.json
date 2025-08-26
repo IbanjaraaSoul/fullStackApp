@@ -1,0 +1,27 @@
+{
+  "name": "fullstackapp",
+  "version": "1.0.0",
+  "description": "Full-stack application with React, NestJS, fp-ts, Moon, and PostgreSQL",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "build": "npm run build --workspaces",
+    "install:all": "npm install && npm install --workspace=frontend && npm install --workspace=backend",
+    "db:setup": "npm run db:setup --workspace=backend",
+    "db:migrate": "npm run db:migrate --workspace=backend",
+    "test": "npm run test --workspaces",
+    "test:small": "npm run test:small --workspaces",
+    "test:medium": "npm run test:medium --workspaces",
+    "test:large": "npm run test:large --workspaces",
+    "test:ci": "npm run test:ci --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
