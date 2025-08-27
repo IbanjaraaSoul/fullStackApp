@@ -19,7 +19,7 @@ jest.mock('axios', () => ({
   delete: jest.fn(),
 }));
 
-// Test categorization utilities
+// Test categorization utilities (for documentation purposes)
 export const testCategories = {
   SMALL: 'small',
   MEDIUM: 'medium', 
@@ -28,36 +28,10 @@ export const testCategories = {
 
 export type TestCategory = typeof testCategories[keyof typeof testCategories];
 
-// Simple test decorators
-export const small = (testName: string, testFn: () => void | Promise<void>) => {
-  describe(`[Small] ${testName}`, () => {
-    beforeAll(() => {
-      jest.setTimeout(60000); // 60 seconds max
-    });
-    
-    it(testName, testFn);
-  });
-};
-
-export const medium = (testName: string, testFn: () => void | Promise<void>) => {
-  describe(`[Medium] ${testName}`, () => {
-    beforeAll(() => {
-      jest.setTimeout(300000); // 5 minutes max
-    });
-    
-    it(testName, testFn);
-  });
-};
-
-export const large = (testName: string, testFn: () => void | Promise<void>) => {
-  describe(`[Large] ${testName}`, () => {
-    beforeAll(() => {
-      jest.setTimeout(900000); // 15 minutes max
-    });
-    
-    it(testName, testFn);
-  });
-};
+// Note: For now, use standard Jest functions in your tests
+// Example: it('[Small] test name', () => { ... })
+// Example: it('[Medium] test name', () => { ... })
+// Example: it('[Large] test name', () => { ... })
 
 // Common test utilities
 export const createMockUser = () => ({
@@ -99,17 +73,17 @@ export const mockApiResponses = {
   deleteUser: { success: true },
 };
 
-// Mock external services
-export const ExternalServiceMock = {
-  alwaysReturnsOk: () => ({
-    call: jest.fn().mockResolvedValue({ success: true }),
-  }),
-  
-  alwaysFails: (error: string) => ({
-    call: jest.fn().mockRejectedValue(new Error(error)),
-  }),
-  
-  returnsData: (data: any) => ({
-    call: jest.fn().mockResolvedValue(data),
-  }),
-};
+// Mock external services (commented out due to Jest type issues)
+// export const ExternalServiceMock = {
+//   alwaysReturnsOk: () => ({
+//     call: jest.fn().mockResolvedValue({ success: true }),
+//   }),
+//   
+//   alwaysFails: (error: string) => ({
+//     call: jest.fn().mockRejectedValue(new Error(error)),
+//   }),
+//   
+//   returnsData: (data: any) => ({
+//     call: jest.fn().mockResolvedValue(data),
+//   }),
+// };
