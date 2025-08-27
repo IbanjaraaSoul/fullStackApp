@@ -14,7 +14,7 @@ services:
       - key: NODE_OPTIONS
         value: "--dns-result-order=ipv4first"
       - key: DB_HOST
-        sync: false
+        value: "db.zwdmrpxmskzzfhnqedmy.supabase.co"
       - key: DB_PORT
         value: "5432"
       - key: DB_USERNAME
