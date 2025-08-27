@@ -9,35 +9,17 @@ export const testCategories = {
 
 export type TestCategory = typeof testCategories[keyof typeof testCategories];
 
-// Simple test decorators
+// Test decorators that properly categorize tests for Jest
 export const small = (testName: string, testFn: () => void | Promise<void>) => {
-  describe(`[Small] ${testName}`, () => {
-    beforeAll(() => {
-      jest.setTimeout(60000); // 60 seconds max
-    });
-    
-    it(testName, testFn);
-  });
+  it(`[Small] ${testName}`, testFn, 60000); // 60 seconds max
 };
 
 export const medium = (testName: string, testFn: () => void | Promise<void>) => {
-  describe(`[Medium] ${testName}`, () => {
-    beforeAll(() => {
-      jest.setTimeout(300000); // 5 minutes max
-    });
-    
-    it(testName, testFn);
-  });
+  it(`[Medium] ${testName}`, testFn, 300000); // 5 minutes max
 };
 
 export const large = (testName: string, testFn: () => void | Promise<void>) => {
-  describe(`[Large] ${testName}`, () => {
-    beforeAll(() => {
-      jest.setTimeout(900000); // 15 minutes max
-    });
-    
-    it(testName, testFn);
-  });
+  it(`[Large] ${testName}`, testFn, 900000); // 15 minutes max
 };
 
 // Common test utilities
