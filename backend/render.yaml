@@ -16,7 +16,7 @@ services:
       - key: DB_HOST
         sync: false
       - key: DB_PORT
-        value: "6543"
+        value: "5432"
       - key: DB_USERNAME
         sync: false
       - key: DB_PASSWORD
