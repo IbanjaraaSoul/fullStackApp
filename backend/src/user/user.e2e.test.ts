@@ -6,6 +6,7 @@ import { large, createMockCreateUserRequest } from '../test/setup';
 import { AppModule } from '../app.module';
 import { UserEntity } from './user.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
 
 // Large tests: Full network access, external systems, long timeouts
 // Test complete HTTP flow and real database interactions
@@ -13,6 +14,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 describe('User E2E Tests - Large Tests', () => {
   let app: INestApplication;
   let userRepository: any;
+  let dataSource: DataSource;
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -23,6 +25,29 @@ describe('User E2E Tests - Large Tests', () => {
     await app.init();
 
     userRepository = moduleFixture.get(getRepositoryToken(UserEntity));
+    dataSource = moduleFixture.get(DataSource);
+    
+    // Ensure the users table exists and is synchronized
+    try {
+      await dataSource.synchronize(true); // This will create all tables
+      console.log('Database synchronized successfully');
+    } catch (error) {
+      console.log('Database synchronization error:', error.message);
+      // Fallback: try to create the table manually
+      try {
+        await userRepository.query(`
+          CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            email VARCHAR(255) UNIQUE NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+          )
+        `);
+      } catch (createError) {
+        console.log('Manual table creation error:', createError.message);
+      }
+    }
   });
 
   afterAll(async () => {
@@ -30,8 +55,22 @@ describe('User E2E Tests - Large Tests', () => {
   });
 
   beforeEach(async () => {
-    // Clean up database before each test
-    await userRepository.clear();
+    try {
+      // Clean up database before each test
+      await userRepository.clear();
+    } catch (error) {
+      // If table doesn't exist or clear fails, try to truncate or delete all
+      if (error.message.includes('relation "users" does not exist')) {
+        console.log('Users table does not exist, skipping clear');
+      } else {
+        // Try alternative cleanup methods
+        try {
+          await userRepository.query('DELETE FROM users');
+        } catch (deleteError) {
+          console.log('Alternative cleanup failed:', deleteError.message);
+        }
+      }
+    }
   });
 
   large('complete user CRUD flow through HTTP endpoints', async () => {
