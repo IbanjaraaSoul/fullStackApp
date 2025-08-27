@@ -192,11 +192,19 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Deploy to staging
+      - name: Deploy Backend to Render
         run: |
-          echo "Deploying to staging environment..."
-          # Add your deployment logic here
-          # This could be deploying to AWS, GCP, Azure, etc.
+          echo "Deploying backend to Render..."
+          # Render auto-deploys when you push to GitHub
+          # Make sure your Render service is connected to this repo
+        env:
+          NODE_ENV: production
+
+      - name: Deploy Frontend to Vercel
+        run: |
+          echo "Deploying frontend to Vercel..."
+          # Vercel auto-deploys when you push to GitHub
+          # Make sure your Vercel project is connected to this repo
         env:
           NODE_ENV: production
 
