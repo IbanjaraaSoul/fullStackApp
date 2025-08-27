@@ -7,7 +7,7 @@ A modern, type-safe full-stack application demonstrating functional programming 
 - **Frontend**: React.js with TypeScript, Vite, and fp-ts for functional programming
 - **Backend**: NestJS with TypeScript, fp-ts, and PostgreSQL
 - **Database**: PostgreSQL with Docker and TypeORM
-- **Testing**: Comprehensive test suite following the **Mercury Testing Philosophy**
+- **Testing**: Comprehensive test suite following the **Three-Tier Testing Strategy**
 - **Validation**: Runtime type validation with io-ts
 - **Architecture**: Monorepo structure with clear separation of concerns
 
@@ -21,7 +21,7 @@ fullstackapp/
 └── package.json       # Monorepo configuration
 ```
 
-## 🧪 **Mercury Testing Philosophy**
+## 🧪 **Three-Tier Testing Strategy**
 
 This project implements a comprehensive testing strategy with three test categories:
 

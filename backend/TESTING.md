@@ -1,10 +1,10 @@
-# 🧪 Mercury Testing Philosophy
+# 🧪 Three-Tier Testing Strategy
 
-This document outlines the testing strategy implemented in this project, following the **Mercury Testing Philosophy** for reliable, fast, and maintainable testing.
+This document outlines the testing strategy implemented in this project, following the **Three-Tier Testing Strategy** for reliable, fast, and maintainable testing.
 
 ## 🎯 **Testing Philosophy Overview**
 
-The Mercury approach categorizes tests into three sizes based on their characteristics and execution requirements:
+The Three-Tier approach categorizes tests into three sizes based on their characteristics and execution requirements:
 
 | Feature | Small | Medium | Large |
 |---------|-------|--------|-------|

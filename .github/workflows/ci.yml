@@ -1,4 +1,4 @@
-name: Mercury CI/CD Pipeline
+name: Three-Tier Testing CI/CD Pipeline
 
 on:
   push:

@@ -1,8 +1,8 @@
-# 🧪 **Frontend Testing - Mercury Testing Philosophy**
+# 🧪 **Frontend Testing - Three-Tier Testing Strategy**
 
 ## 🎯 **Overview**
 
-The frontend follows the same **Mercury Testing Philosophy** as the backend, providing a fast, reliable test suite that gives developers confidence to ship code quickly while maintaining quality.
+The frontend follows the same **Three-Tier Testing Strategy** as the backend, providing a fast, reliable test suite that gives developers confidence to ship code quickly while maintaining quality.
 
 ## 🏗️ **Test Structure**
 
