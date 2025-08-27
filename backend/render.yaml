@@ -11,10 +11,9 @@ services:
         value: production
       - key: PORT
         value: "10000"
-      - key: NODE_OPTIONS
-        value: "--dns-result-order=ipv4first"
+      # Note: No IPv6 enforcement needed for Neon
       - key: DB_HOST
-        value: "db.zwdmrpxmskzzfhnqedmy.supabase.co"
+        sync: false
       - key: DB_PORT
         value: "5432"
       - key: DB_USERNAME
@@ -22,7 +21,7 @@ services:
       - key: DB_PASSWORD
         sync: false
       - key: DB_NAME
-        value: postgres
+        sync: false
       - key: DB_SSL
         value: "true"
       - key: DB_SYNCHRONIZE
