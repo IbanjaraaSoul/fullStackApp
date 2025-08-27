@@ -17,6 +17,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         synchronize: configService.get('DB_SYNCHRONIZE', configService.get('NODE_ENV', 'development') === 'development'),
         logging: configService.get('NODE_ENV', 'development') === 'development',
         ssl: configService.get('DB_SSL', false) ? { rejectUnauthorized: false } : false,
+        extra: {
+          // Force IPv4 connections
+          family: 4
+        },
       }),
       inject: [ConfigService],
     }),
