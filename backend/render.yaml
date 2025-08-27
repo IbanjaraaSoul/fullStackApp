@@ -11,10 +11,12 @@ services:
         value: production
       - key: PORT
         value: "10000"
+      - key: NODE_OPTIONS
+        value: "--dns-result-order=ipv4first"
       - key: DB_HOST
         sync: false
       - key: DB_PORT
-        value: "5432"
+        value: "6543"
       - key: DB_USERNAME
         sync: false
       - key: DB_PASSWORD

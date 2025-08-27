@@ -13,6 +13,32 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         const password = configService.get('DB_PASSWORD', 'password');
         const database = configService.get('DB_NAME', 'fullstackapp');
         
+        // Force IPv4 by using the direct IP address if possible
+        // For Supabase, we'll use the connection string approach
+        const isProduction = configService.get('NODE_ENV', 'development') === 'production';
+        
+        if (isProduction && configService.get('DB_SSL', false)) {
+          // Use connection string for production with explicit IPv4
+          const connectionString = `postgresql://${username}:${password}@${host}:${port}/${database}?sslmode=require&family=4`;
+          
+          return {
+            type: 'postgres',
+            url: connectionString,
+            entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+            synchronize: configService.get('DB_SYNCHRONIZE', false),
+            logging: false,
+            extra: {
+              // Force IPv4 connections
+              family: 4,
+              // Connection timeouts
+              connectionTimeoutMillis: 10000,
+              query_timeout: 10000,
+              statement_timeout: 10000,
+            },
+          };
+        }
+        
+        // Development configuration
         return {
           type: 'postgres',
           host,
@@ -21,16 +47,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           password,
           database,
           entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-          synchronize: configService.get('DB_SYNCHRONIZE', configService.get('NODE_ENV', 'development') === 'development'),
-          logging: configService.get('NODE_ENV', 'development') === 'development',
-          ssl: configService.get('DB_SSL', false) ? { rejectUnauthorized: false } : false,
+          synchronize: configService.get('DB_SYNCHRONIZE', true),
+          logging: true,
+          ssl: false,
           extra: {
-            // Force IPv4 connections and disable IPv6
             family: 4,
-            // Additional connection options
-            connectionTimeoutMillis: 10000,
-            query_timeout: 10000,
-            statement_timeout: 10000,
           },
         };
       },
