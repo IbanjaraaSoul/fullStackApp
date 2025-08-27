@@ -20,5 +20,15 @@
     "paths": {
       "@/*": ["src/*"]
     }
-  }
+  },
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "src/**/*.e2e.ts",
+    "src/test/**/*",
+    "test/**/*",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/*.e2e.ts"
+  ]
 }
